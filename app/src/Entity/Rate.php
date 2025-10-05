@@ -9,7 +9,6 @@ use App\Repository\RateRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: RateRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -22,15 +21,12 @@ class Rate
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING, enumType: CryptoPair::class)]
-    #[Groups(['api'])]
     private CryptoPair $pair;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 18, scale: 8)]
-    #[Groups(['api'])]
     private string $price;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['api'])]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $createdAt;
 
     public function getId(): ?int

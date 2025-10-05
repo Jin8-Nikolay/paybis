@@ -9,4 +9,7 @@ done
 echo "Database ready, running migrations..."
 php bin/console doctrine:migrations:migrate --no-interaction
 
-cron -f & php-fpm
+echo "Starting cron..."
+cron -f &
+
+php-fpm

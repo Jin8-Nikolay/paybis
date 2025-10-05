@@ -34,12 +34,15 @@ class RateController extends AbstractController
         $end = new DateTimeImmutable();
         $start = $end->modify('-24 hours');
 
-        return $this->json(
-            $this->rateRepository->findRates($pairEnum, $start, $end),
-            200,
-            [],
-            ['groups' => 'api', 'datetime_format' => 'Y-m-d H:i:s']
-        );
+        $rates = $this->rateRepository->findRates($pairEnum, $start, $end);
+
+        $data = array_map(fn($rate) => [
+            'pair' => $rate->getPair()->value,
+            'price' => $rate->getPrice(),
+            'createdAt' => $rate->getCreatedAt()->format('Y-m-d H:i:s'),
+        ], $rates);
+
+        return $this->json($data);
     }
 
     #[Route('/day', name: 'rates_day', methods: ['GET'])]
@@ -61,12 +64,15 @@ class RateController extends AbstractController
 
         $start = (clone $day)->setTime(0, 0);
         $end = (clone $day)->setTime(23, 59, 59);
+        $rates = $this->rateRepository->findRates($pairEnum, $start, $end);
 
-        return $this->json(
-            $this->rateRepository->findRates($pairEnum, $start, $end),
-            200,
-            [],
-            ['groups' => 'api', 'datetime_format' => 'Y-m-d H:i:s']
-        );
+        $data = array_map(fn($rate) => [
+            'pair' => $rate->getPair()->value,
+            'price' => $rate->getPrice(),
+            'createdAt' => $rate->getCreatedAt()->format('Y-m-d H:i:s'),
+        ], $rates);
+
+        return $this->json($data);
+
     }
 }

@@ -12,4 +12,7 @@ WORKDIR /var/www/html/app
 COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
+COPY docker/php/fetch-rates.cron /etc/cron.d/fetch-rates
+RUN chmod 0644 /etc/cron.d/fetch-rates
+
 CMD ["docker-entrypoint.sh"]

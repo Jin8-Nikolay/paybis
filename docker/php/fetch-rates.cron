@@ -1,1 +1,5 @@
-*/5 * * * * www-data php /var/www/html/app/bin/console app:fetch-rates >> /var/log/fetch-rates.log 2>&1
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+*/5 * * * * root cd /var/www/html/app && /usr/local/bin/php bin/console app:fetch-rates >> /var/log/fetch-rates.log 2>&1
+
