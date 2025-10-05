@@ -1,0 +1,1 @@
+*/5 * * * * www-data php /var/www/html/app/bin/console app:fetch-rates >> /var/log/fetch-rates.log 2>&1

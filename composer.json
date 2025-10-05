@@ -1,0 +1,7 @@
+{
+    "require": {
+        "symfony/framework-bundle": "^6.0",
+        "symfony/twig-bundle": "^6.1",
+        "symfony/web-server-bundle": "^4.4"
+    }
+}
